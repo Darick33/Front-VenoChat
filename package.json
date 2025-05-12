@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "venochat": "node skull.js && ng serve -o ",
+    "venochat": "node skull.js && ng serve-o ",
     "start": " node skull.js &&  ng serve-o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
@@ -23,6 +23,7 @@
     "@angular/ssr": "^19.2.4",
     "express": "^4.18.2",
     "front-veno-chat": "file:",
+    "js-dos": "^8.3.16",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
