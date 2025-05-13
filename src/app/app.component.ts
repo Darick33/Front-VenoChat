@@ -1,9 +1,12 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, CUSTOM_ELEMENTS_SCHEMA, effect, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Form, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { FormChildComponent } from './form-child/form-child.component';
 import { toSignal } from '@angular/core/rxjs-interop';
-import {  RaycastingComponent } from './doom/doom.component';
+import {  DoomComponent, } from './doom/doom.component';
+import { ThemeService } from './services/theme.service';
+import { MatIconModule } from '@angular/material/icon';
+
 export interface ItemForm {
   id: FormControl<number>;
   name: FormControl<string>;
@@ -12,11 +15,28 @@ export interface ItemForm {
 export type CustomFormGroup = FormGroup<ItemForm>
 @Component({
   selector: 'app-root',
-  imports: [ ReactiveFormsModule, FormChildComponent, RaycastingComponent],
+  imports: [ ReactiveFormsModule, FormChildComponent, DoomComponent, MatIconModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent {
+
+  private themeService = inject(ThemeService);
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+  playClickSound() {
+  const audio = new Audio();
+  audio.src = 'pato.mp3';
+  audio.load();
+  audio.play().catch(error => {
+    console.error('No se pudo reproducir el sonido:', error);
+  });
+}
+
+  
   fb = inject(NonNullableFormBuilder)
   form: FormGroup<{items: FormArray<CustomFormGroup>}> = this.fb.group({ items : this.fb.array<CustomFormGroup>([])
 
@@ -25,24 +45,19 @@ export class AppComponent {
     return this.form.controls.items
 
    }
+   
    itemChanges = toSignal(this.items.valueChanges);
    totalValue = computed(() => {
      const value = this.itemChanges()?.reduce((total, item) => total + (Number(item.value) || 0), 0)
      return value
     })
-    constructor() {
-      // effect(() => {
-        //   this.form.controls.items.valueChanges.subscribe((value) => {
-          //     this.items.set([...this.form.controls.items.controls])
-          //   })
-          // })
-        }
+   
    addItem() {
     const id = this.items.length + 1
     const itemFornm = this.fb.group<ItemForm>({
       id: this.fb.control(id),
-      name: this.fb.control('', {validators: [Validators.required]}),
-      value: this.fb.control(0, {validators: [Validators.required]})
+      name: this.fb.control('', {validators: [Validators.required, Validators.email, Validators.minLength(3)]}),
+      value: this.fb.control(0, {validators: [Validators.required, ]})
     }
     )
     this.form.controls.items.push(itemFornm)

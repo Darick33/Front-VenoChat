@@ -1,12 +1,13 @@
-<div [formGroup]="formGroup()">
-    <app-custom-input [control]="formGroup().controls.name"
-    formControlName="name"
-    />
-    <app-custom-input [control]="formGroup().controls.value"
-    formControlName="value"
-    />
-    
-    
+<div [formGroup]="formGroup()" class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-lg shadow-sm">
   
+  <app-custom-input 
+    [control]="formGroup().controls.name"
+    formControlName="name"
+  />
 
+  <app-custom-input 
+    [control]="formGroup().controls.value"
+    formControlName="value"
+  />
+  
 </div>

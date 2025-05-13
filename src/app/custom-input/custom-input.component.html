@@ -1,9 +1,30 @@
 @let localControl = control();
-<input [formControl]="localControl" (blur)="onToched()" />
+<input 
+  class="p-3 font-bold border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+  [class.border-red-500]="localControl.invalid && (localControl.dirty || localControl.touched)"
+ 
+  [formControl]="localControl" 
+  (blur)="onTouched()" 
+/>
+
 @if (localControl.invalid && (localControl.dirty || localControl.touched)) {
-    <div class="error-messages">
-        @if (localControl.errors?.["required"]) {
-            <span>Campo requerido</span>
-        }
-    </div>
+  <div class="error-messages text-sm text-red-600 mt-1">
+    @if (localControl.errors?.['required']) {
+      <span>Campo requerido</span>
+    }
+    @if (localControl.errors?.['minlength']) {
+      <span>Debe tener al menos {{ localControl.errors?.['minlength']?.requiredLength }} caracteres</span>
+    }@else if (localControl.errors?.['maxlength']) {
+      <span>No debe exceder de {{ localControl.errors?.['maxlength']?.requiredLength }} caracteres</span>
+    }
+    @else if (localControl.errors?.['email']) {
+      <span>Correo electrónico inválido</span>
+    }
+    @else if (localControl.errors?.['pattern']) {
+      <span>Formato inválido</span>
+    }
+    @else if (localControl.errors?.['cedula']) {
+      <span>Cédula inválida</span>
+    }
+  </div>
 }

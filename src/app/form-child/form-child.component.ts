@@ -11,5 +11,6 @@ import { CustomInputComponent } from '../custom-input/custom-input.component';
 })
 export class FormChildComponent {
   formGroup = input.required<FormGroup<ItemForm>>()
+  
 
 }

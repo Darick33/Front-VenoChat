@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}@import 'tailwindcss';
+
+/* Tema Claro */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-primary: #6a0dad;
+  --color-accent: #32cd32;
+}
+
+/* Tema Oscuro */
+body.dark {
+  --color-bg: #121212;
+  --color-text: #f0f0f0;
+  --color-primary: #b19cd9;
+  --color-accent: #90ee90;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
