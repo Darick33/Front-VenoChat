@@ -1,0 +1,35 @@
+<div [formGroup]="formGroup()" class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-lg shadow-sm">
+  
+    <label for="">Nombre
+      <app-custom-input 
+        [control]="formGroup().controls.name"
+        formControlName="name"
+      />
+
+  </label>
+    <label for="">Email
+
+  <app-custom-input 
+    [control]="formGroup().controls.email"
+    formControlName="email"
+  />
+  </label>
+
+    <label for="">Direccion
+  
+    <app-custom-input 
+        [control]="formGroup().controls.address"
+        formControlName="address"
+  />
+  </label>
+
+    <label for="">Telefono
+
+    <app-custom-input 
+        [control]="formGroup().controls.phone"
+        formControlName="phone"
+  />
+  </label>
+
+
+</div>

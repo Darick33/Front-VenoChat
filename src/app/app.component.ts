@@ -6,6 +6,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import {  DoomComponent, } from './doom/doom.component';
 import { ThemeService } from './services/theme.service';
 import { MatIconModule } from '@angular/material/icon';
+import { UserForm } from './interfaces/user.interface';
+import { FormUserComponent } from './form-user/form-user.component';
 
 export interface ItemForm {
   id: FormControl<number>;
@@ -15,7 +17,7 @@ export interface ItemForm {
 export type CustomFormGroup = FormGroup<ItemForm>
 @Component({
   selector: 'app-root',
-  imports: [ ReactiveFormsModule, FormChildComponent, DoomComponent, MatIconModule],
+  imports: [ ReactiveFormsModule, FormChildComponent, DoomComponent, MatIconModule, FormUserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -29,7 +31,7 @@ export class AppComponent {
   }
   playClickSound() {
   const audio = new Audio();
-  audio.src = 'pato.mp3';
+  audio.src = 'cuak.mp3';
   audio.load();
   audio.play().catch(error => {
     console.error('No se pudo reproducir el sonido:', error);
@@ -40,7 +42,9 @@ export class AppComponent {
   fb = inject(NonNullableFormBuilder)
   form: FormGroup<{items: FormArray<CustomFormGroup>}> = this.fb.group({ items : this.fb.array<CustomFormGroup>([])
 
-   })
+  })
+  formUser: FormGroup<{items: FormArray<FormGroup<UserForm>>}> = this.fb.group({items: this.fb.array<FormGroup<UserForm>>([])})
+
    get items(){
     return this.form.controls.items
 
@@ -61,5 +65,17 @@ export class AppComponent {
     }
     )
     this.form.controls.items.push(itemFornm)
+  }
+  addUser() {
+    const id = this.items.length + 1
+    const userForm = this.fb.group<UserForm>({
+      id: this.fb.control(id),
+      name: this.fb.control('', {validators: [Validators.required,]}),
+      email: this.fb.control('', {validators: [Validators.required, Validators.email]}),
+      password: this.fb.control('', {validators: [Validators.required, Validators.minLength(6)]}),
+      phone: this.fb.control('', {validators: [Validators.required]}),
+      address: this.fb.control('', {validators: [Validators.required]})
+    });
+    this.formUser.controls.items.push(userForm)
   }
 }    

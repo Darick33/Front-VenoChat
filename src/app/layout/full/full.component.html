@@ -1,0 +1,16 @@
+@defer (on viewport) {
+
+  <img class="w-50 floating-pato" (click)="playClickSound()" src="pato.png" alt="">
+}@loading {
+  <animated-icons
+  src="https://animatedicons.co/get-icon?name=Loading&style=minimalistic&token=68399f80-d0bb-4976-b417-1153937b9c51"
+  trigger="click"
+  attributes='{"variationThumbColour":"#000000","variationName":"Dark","variationNumber":4,"numberOfGroups":2,"strokeWidth":1.5,"backgroundIsGroup":true,"defaultColours":{"group-1":"#64FF00FF","group-2":"#FA00FFFF","background":"#4A4545FF"}}'
+  height="200"
+  width="200"
+></animated-icons>
+}@placeholder {
+  <p>placeholder</p>
+}@error {
+  <p>error</p>
+}

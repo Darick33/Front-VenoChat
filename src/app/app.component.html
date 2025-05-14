@@ -1,6 +1,5 @@
 
-<!-- Botón para alternar entre modos -->
-<!-- Botón para alternar entre modos -->
+
 <button class="floating-button">
   <animated-icons
     (click)="toggleTheme()"
@@ -25,6 +24,11 @@
   @for(formGroup of form.controls.items.controls; track formGroup.controls.id.value){
     <app-form-child [formGroup]="formGroup"></app-form-child>
   }
+  <button class="bg-blue-500 text-black p-3 button-primary mt-5" (click)="addUser()">Agregar User</button>
+  @for(formGroup of formUser.controls.items.controls; track formGroup.controls.name.value){
+    <app-form-user [formGroup]="formGroup"></app-form-user>
+  }
+  
   <h3>total value: {{totalValue()}}</h3>
 </div>
 @defer (on viewport) {

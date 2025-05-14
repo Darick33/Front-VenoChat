@@ -38,6 +38,13 @@ body {
   background: transparent;
   cursor: pointer;
 }
+.floating-pato:hover {
+  background-color: var(--color-primary); /* Usa el morado declarado */
+  border-radius: 50%; /* Fondo redondeado */
+  transform: rotate(360deg); /* Da vuelta completa */
+  transition: transform 0.6s ease, background-color 0.3s ease;
+  padding: 5px; /* Opcional: para que el fondo morado se note alrededor del pato */
+}
 
 
 .button-primary {
