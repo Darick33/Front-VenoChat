@@ -4,10 +4,10 @@ import { Form, FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { FormChildComponent } from './form-child/form-child.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import {  DoomComponent, } from './doom/doom.component';
-import { ThemeService } from './services/theme.service';
 import { MatIconModule } from '@angular/material/icon';
 import { UserForm } from './interfaces/user.interface';
 import { FormUserComponent } from './form-user/form-user.component';
+import { ThemeService } from './services';
 
 export interface ItemForm {
   id: FormControl<number>;
@@ -17,7 +17,7 @@ export interface ItemForm {
 export type CustomFormGroup = FormGroup<ItemForm>
 @Component({
   selector: 'app-root',
-  imports: [ ReactiveFormsModule, FormChildComponent, DoomComponent, MatIconModule, FormUserComponent],
+  imports: [ ReactiveFormsModule, FormChildComponent,  MatIconModule, FormUserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -38,12 +38,14 @@ export class AppComponent {
   });
 }
 
-  
-  fb = inject(NonNullableFormBuilder)
-  form: FormGroup<{items: FormArray<CustomFormGroup>}> = this.fb.group({ items : this.fb.array<CustomFormGroup>([])
-
-  })
+  /**
+   * ==============Declaracion de Formualarios==============  */
+    fb = inject(NonNullableFormBuilder)
+  form: FormGroup<{items: FormArray<CustomFormGroup>}> = this.fb.group({ items : this.fb.array<CustomFormGroup>([])})
   formUser: FormGroup<{items: FormArray<FormGroup<UserForm>>}> = this.fb.group({items: this.fb.array<FormGroup<UserForm>>([])})
+  /** ==============Declaracion de Formualarios============== 
+   */
+  
 
    get items(){
     return this.form.controls.items

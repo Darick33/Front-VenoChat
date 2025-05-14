@@ -1,6 +1,8 @@
 
 
-<button class="floating-button">
+<!--
+==============Cambio de Tema============== -->
+ <button class="floating-button">
   <animated-icons
     (click)="toggleTheme()"
     src="https://animatedicons.co/get-icon?name=Light%20Mode&style=minimalistic&token=5f4d2675-67d4-4c5e-9139-8226e36723ae"
@@ -10,28 +12,39 @@
     width="50"
   ></animated-icons>
 </button>
-
-<div>
+<!-- ===========================================
+-->
+<!-- ==============Titulos============== -->
+ <div>
  <div class="flex items-center justify-center gap-4 py-6 animate-fade-in">
   <h1 class="text-4xl font-bold text-primary drop-shadow-md tracking-wide">
     VENOCHAT
   </h1>
   <img src="venochat 1.svg" class="w-16 h-16 animate-pulse" alt="Logo de VENOCHAT" />
 </div>
+<!-- ===========================================  -->
 
-
+<!-- ==============Formulario de Items============== -->
   <button class="bg-blue-500 text-black p-3 button-primary" (click)="addItem()">Agregar Item</button>
   @for(formGroup of form.controls.items.controls; track formGroup.controls.id.value){
     <app-form-child [formGroup]="formGroup"></app-form-child>
   }
-  <button class="bg-blue-500 text-black p-3 button-primary mt-5" (click)="addUser()">Agregar User</button>
+<!-- ===========================================  -->
+<!-- ==============Formulario de Usuario============== -->
+ <button class="bg-blue-500 text-black p-3 button-primary mt-5" (click)="addUser()">Agregar User</button>
   @for(formGroup of formUser.controls.items.controls; track formGroup.controls.name.value){
     <app-form-user [formGroup]="formGroup"></app-form-user>
   }
+<!-- ===========================================  -->
+
+ 
+  
   
   <h3>total value: {{totalValue()}}</h3>
 </div>
-@defer (on viewport) {
+
+<!-- ==============Pato con defer ============== -->
+ @defer (on viewport) {
 
   <img class="w-50 floating-pato" (click)="playClickSound()" src="pato.png" alt="">
 }@loading {
@@ -47,5 +60,7 @@
 }@error {
   <p>error</p>
 }
+<!-- ===========================================  -->
+
 
 <!-- <app-doom></app-doom> -->
