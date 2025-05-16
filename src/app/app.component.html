@@ -35,6 +35,8 @@
   @for(formGroup of formUser.controls.items.controls; track formGroup.controls.name.value){
     <app-form-user [formGroup]="formGroup"></app-form-user>
   }
+  <button (click)="printForms()">Imprimir formularios</button>
+
 <!-- ===========================================  -->
 
  

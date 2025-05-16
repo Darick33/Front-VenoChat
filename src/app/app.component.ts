@@ -80,4 +80,9 @@ export class AppComponent {
     });
     this.formUser.controls.items.push(userForm)
   }
+  printForms() {
+  console.log('Form Items:', JSON.stringify(this.form.value, null, 2));
+  console.log('Form User Items:', JSON.stringify(this.formUser.value, null, 2));
+}
+
 }    
